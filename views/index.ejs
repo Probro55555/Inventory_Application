@@ -1,0 +1,270 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <a href="/new">Add new game</a>
+        <div class="game_search">
+        <form method="get" action="/">
+             <fieldset>
+                    <div class="form-group">
+                        <label for="first_name">Author Name</label>
+                        <input type="text" id="game_name" name="game_name" placeholder="e.g. RDR2" />
+                    </div>
+             </fieldset>
+             <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Search game</button>
+                    
+            </div>
+        </form>
+        <form method="get" action="/category">
+            <fieldset>
+                <legend>Choose game genre</legend>
+                <ul>
+                     <li> 
+                        <label for="all"> All
+                            <input type="radio" id="all" name="category" value="All" checked/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="arpg"> Action RPG
+                            <input type="radio" id="arpg" name="category" value="Action RPG"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="soulslike"> Soulslike
+                            <input type="radio" id="soulslike" name="category" value="Soulslike"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="action-adventure"> Action-Adventure
+                            <input type="radio" id="action-adventure" name="category" value="Action-Adventure"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="roguelike"> Roguelike
+                            <input type="radio" id="roguelike" name="category" value="Roguelike"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="turn-based-rpg"> Turn-Based RPG
+                            <input type="radio" id="turn-based-rpg" name="category" value="Turn-Based RPG"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="fps"> First-Person Shooter
+                            <input type="radio" id="fps" name="category" value="First-Person Shooter"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="interactive-drama"> Interactive Drama
+                            <input type="radio" id="interactive-drama" name="category" value="Interactive Drama"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="metroidvania"> Metroidvania
+                            <input type="radio" id="metroidvania" name="category" value="Metroidvania"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="survival-horror"> Survival Horror
+                            <input type="radio" id="survival-horror" name="category" value="Survival Horror"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="open-world-adventure"> Open World Adventure
+                            <input type="radio" id="open-world-adventure" name="category" value="Open World Adventure"/>
+                        </label>
+                    </li>
+                </ul>require(".env").config();
+
+            </fieldset>
+            <fieldset>
+                <legend>Developers</legend>
+                <ul>
+                    <li> 
+                        <label for="all"> All
+                            <input type="radio" id="all" name="developer" value="All" checked/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="cd-projekt-red"> CD Projekt Red
+                            <input type="radio" id="cd-projekt-red" name="developer" value="CD Projekt Red"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="fromsoftware"> FromSoftware
+                            <input type="radio" id="fromsoftware" name="developer" value="FromSoftware"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="insomniac-games"> Insomniac Games
+                            <input type="radio" id="insomniac-games" name="developer" value="Insomniac Games"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="santa-monica-studio"> Santa Monica Studio
+                            <input type="radio" id="santa-monica-studio" name="developer" value="Santa Monica Studio"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="remedy-entertainment"> Remedy Entertainment
+                            <input type="radio" id="remedy-entertainment" name="developer" value="Remedy Entertainment"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="housemarque"> Housemarque
+                            <input type="radio" id="housemarque" name="developer" value="Housemarque"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="sucker-punch-productions"> Sucker Punch Productions
+                            <input type="radio" id="sucker-punch-productions" name="developer" value="Sucker Punch Productions"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="quantic-dream"> Quantic Dream
+                            <input type="radio" id="quantic-dream" name="developer" value="Quantic Dream"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="warhorse-studios"> Warhorse Studios
+                            <input type="radio" id="warhorse-studios" name="developer" value="Warhorse Studios"/>
+                        </label>
+                    </li>
+                    <li> 
+                        <label for="larian-studios"> Larian Studios
+                            <input type="radio" id="larian-studios" name="developer" value="Larian Studios"/>
+                        </label>
+                    </li>
+                </ul>
+            </fieldset>
+            <button type="submit" class="btn btn-primary">Search by category</button>
+            <button type="submit" class="btn btn-primary">Reset Categories</button>
+
+        </form>
+        </div>
+        <div class="game_list">
+        
+             <% games.forEach((game, index) => { %>
+                <a href="/games/<%=game.game_id %>">
+                    <div class="message-text"><%= game.name %></div>
+                
+                </a>
+                    
+                
+            <% }); %>
+
+        </div>
+            
+        
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Inventory</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="top-nav">
+            <h1>Game Catalog</h1>
+            <a href="/new" class="btn btn-primary">+ Add New Game</a>
+        </header>
+
+        <div class="catalog-layout">
+            <aside class="game_search">
+                <!-- Title Search -->
+                <form method="get" action="/">
+                    <fieldset>
+                        <legend>Search</legend>
+                        <div class="form-group">
+                            <label for="game_name">Game Title</label>
+                            <input type="text" id="game_name" name="game_name" placeholder="e.g. Elden Ring" />
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Search Game</button>
+                </form>
+
+                <!-- Category & Developer Filters -->
+                <form method="get" action="/category">
+                    <fieldset>
+                        <legend>Choose Game Genre</legend>
+                        <ul>
+                            <li><label for="all_genres">All <input type="radio" id="all_genres" name="category" value="All" checked/></label></li>
+                            <li><label for="arpg">Action RPG <input type="radio" id="arpg" name="category" value="Action RPG"/></label></li>
+                            <li><label for="soulslike">Soulslike <input type="radio" id="soulslike" name="category" value="Soulslike"/></label></li>
+                            <li><label for="action-adventure">Action-Adventure <input type="radio" id="action-adventure" name="category" value="Action-Adventure"/></label></li>
+                            <li><label for="roguelike">Roguelike <input type="radio" id="roguelike" name="category" value="Roguelike"/></label></li>
+                            <li><label for="turn-based-rpg">Turn-Based RPG <input type="radio" id="turn-based-rpg" name="category" value="Turn-Based RPG"/></label></li>
+                            <li><label for="fps">First-Person Shooter <input type="radio" id="fps" name="category" value="First-Person Shooter"/></label></li>
+                            <li><label for="interactive-drama">Interactive Drama <input type="radio" id="interactive-drama" name="category" value="Interactive Drama"/></label></li>
+                            <li><label for="metroidvania">Metroidvania <input type="radio" id="metroidvania" name="category" value="Metroidvania"/></label></li>
+                            <li><label for="survival-horror">Survival Horror <input type="radio" id="survival-horror" name="category" value="Survival Horror"/></label></li>
+                            <li><label for="open-world-adventure">Open World Adventure <input type="radio" id="open-world-adventure" name="category" value="Open World Adventure"/></label></li>
+                            <li><label for="stealth">Stealth <input type="radio" id="stealth" name="category" value="Stealth"/></label></li>
+                            <li><label for="platformer">Platformer <input type="radio" id="platformer" name="category" value="Platformer"/></label></li>
+                            <li><label for="immersive-sim">Immersive Sim <input type="radio" id="immersive-sim" name="category" value="Immersive Sim"/></label></li>
+                            <li><label for="hack-and-slash">Hack and Slash <input type="radio" id="hack-and-slash" name="category" value="Hack and Slash"/></label></li>
+                            <li><label for="tactical-rpg">Tactical RPG <input type="radio" id="tactical-rpg" name="category" value="Tactical RPG"/></label></li>
+                            <li><label for="psychological-horror">Psychological Horror <input type="radio" id="psychological-horror" name="category" value="Psychological Horror"/></label></li>
+                        </ul>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Developers</legend>
+                        <ul>
+                            <li><label for="all_devs">All <input type="radio" id="all_devs" name="developer" value="All" checked/></label></li>
+                            <li><label for="cd-projekt-red">CD Projekt Red <input type="radio" id="cd-projekt-red" name="developer" value="CD Projekt Red"/></label></li>
+                            <li><label for="fromsoftware">FromSoftware <input type="radio" id="fromsoftware" name="developer" value="FromSoftware"/></label></li>
+                            <li><label for="insomniac-games">Insomniac Games <input type="radio" id="insomniac-games" name="developer" value="Insomniac Games"/></label></li>
+                            <li><label for="santa-monica-studio">Santa Monica Studio <input type="radio" id="santa-monica-studio" name="developer" value="Santa Monica Studio"/></label></li>
+                            <li><label for="remedy-entertainment">Remedy Entertainment <input type="radio" id="remedy-entertainment" name="developer" value="Remedy Entertainment"/></label></li>
+                            <li><label for="housemarque">Housemarque <input type="radio" id="housemarque" name="developer" value="Housemarque"/></label></li>
+                            <li><label for="sucker-punch-productions">Sucker Punch Productions <input type="radio" id="sucker-punch-productions" name="developer" value="Sucker Punch Productions"/></label></li>
+                            <li><label for="quantic-dream">Quantic Dream <input type="radio" id="quantic-dream" name="developer" value="Quantic Dream"/></label></li>
+                            <li><label for="warhorse-studios">Warhorse Studios <input type="radio" id="warhorse-studios" name="developer" value="Warhorse Studios"/></label></li>
+                            <li><label for="larian-studios">Larian Studios <input type="radio" id="larian-studios" name="developer" value="Larian Studios"/></label></li>
+                            <li><label for="capcom">Capcom <input type="radio" id="capcom" name="developer" value="Capcom"/></label></li>
+                            <li><label for="bioware">BioWare <input type="radio" id="bioware" name="developer" value="BioWare"/></label></li>
+                            <li><label for="arkane-studios">Arkane Studios <input type="radio" id="arkane-studios" name="developer" value="Arkane Studios"/></label></li>
+                            <li><label for="team-cherry">Team Cherry <input type="radio" id="team-cherry" name="developer" value="Team Cherry"/></label></li>
+                            <li><label for="supergiant-games">Supergiant Games <input type="radio" id="supergiant-games" name="developer" value="Supergiant Games"/></label></li>
+                            <li><label for="obsidian-entertainment">Obsidian Entertainment <input type="radio" id="obsidian-entertainment" name="developer" value="Obsidian Entertainment"/></label></li>
+                        </ul>
+                    </fieldset>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                        <button type="submit" class="btn btn-primary">Filter By Selection</button>
+                        <a href="/" class="btn btn-secondary" style="text-align: center;">Reset Filters</a>
+                    </div>
+                </form>
+            </aside>
+
+            <!-- Game Cards Grid -->
+            <main class="game_list">
+                <% games.forEach((game) => { %>
+                    <a href="/games/<%= game.game_id %>" class="game-card">
+                        <% if (game.image_url) { %>
+                            <img src="<%= game.image_url %>" alt="<%= game.name %> Cover" class="game-card-img" />
+                        <% } else { %>
+                            <div class="game-card-placeholder">No Cover Art</div>
+                        <% } %>
+                        <div class="game-card-title"><%= game.name %></div>
+                    </a>
+                <% }); %>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

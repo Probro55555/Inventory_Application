@@ -1,0 +1,214 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Message</title>
+    
+</head>
+<body>
+    <main class="container">
+        <header class="header-section">
+            <h1>Update Game</h1>
+        </header>
+
+     
+
+        <div class="form-card">
+            <form method="post" action="/games/<%=game.game_id %>/update">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="game_name">Game name</label>
+                        <input type="text" id="game_name" name="game_name" value="<%=game.name %>" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age_rating">Age rating</label>
+                        <select name="age_rating" id="age_rating">
+                            
+                            <option value="Kids">Kids</option>
+                            <option value="Teen">Teen</option>
+                            <option value="Mature 17+">Mature 17+</option>
+                            
+                        </select>
+                    </div>
+                    <label for="score">Game Score (out of 100)</label>
+                    <input type="number" id="score" name="score" value="<%=game.score %>"  required/>
+
+                    <label for="Genre id">Select Genre</label>
+                    
+               <select name="genre" id="genre">
+                        <% genres.forEach(genre => { %>
+                            <option 
+                            value="<%= genre.genre_id %>" 
+                            <%= genre.genre_id == game?.genre_id ? 'selected' : '' %>
+                            >
+                            <%= genre.genre_name %>
+                            </option>
+                        <% }) %>
+                </select>
+
+                    <label for="developer-select">Select Developer</label>
+                        
+                       
+                       <select name="developer" id="developer">
+                            <% developers.forEach(dev => { %>
+                                <option 
+                                value="<%= dev.developer_id %>" 
+                                <%= dev.developer_id == game?.developer_id ? 'selected' : '' %>
+                                >
+                                <%= dev.developer_name %>
+                                </option>
+                            <% }) %>
+                        </select>
+
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Message</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
+
+ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Game - <%= game.name %></title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <header class="header-section">
+            <h1>Update Game</h1>
+        </header>
+
+        <% if (locals.errors && errors.length > 0) { %>
+            <ul class="error-box">
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <div class="form-card">
+            <form id="update-form" method="post" action="/games/<%= game.game_id %>/update">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="game_name">Game Name</label>
+                        <input type="text" id="game_name" name="game_name" value="<%= game.name %>" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_url">Cover Image URL</label>
+                        <input 
+                            type="url" 
+                            id="image_url" 
+                            name="image_url" 
+                            placeholder="https://example.com/cover.jpg" 
+                            value="<%= game.image_url || '' %>" 
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age_rating">Age Rating</label>
+                        <select name="age_rating" id="age_rating">
+                            <option value="Kids" <%= game.age_rating === 'Kids' ? 'selected' : '' %>>Kids</option>
+                            <option value="Teen" <%= game.age_rating === 'Teen' ? 'selected' : '' %>>Teen</option>
+                            <option value="Mature 17+" <%= game.age_rating === 'Mature 17+' ? 'selected' : '' %>>Mature 17+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="score">Game Score (0 - 100)</label>
+                        <input type="number" id="score" name="score" value="<%= game.score %>" min="0" max="100" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genre">Select Genre</label>
+                        <select name="genre" id="genre">
+                            <% genres.forEach(genre => { %>
+                                <option 
+                                    value="<%= genre.genre_id %>" 
+                                    <%= genre.genre_id == game?.genre_id ? 'selected' : '' %>
+                                >
+                                    <%= genre.genre_name %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="developer">Select Developer</label>
+                        <select name="developer" id="developer">
+                            <% developers.forEach(dev => { %>
+                                <option 
+                                    value="<%= dev.developer_id %>" 
+                                    <%= dev.developer_id == game?.developer_id ? 'selected' : '' %>
+                                >
+                                    <%= dev.developer_name %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <!-- Hidden input to hold passcode populated from dialog -->
+                    <input type="hidden" name="admin_passcode" id="hidden_admin_passcode" />
+                </fieldset>
+
+                <div class="card-actions">
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <a href="/games/<%= game.game_id %>" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Update Passcode Dialog -->
+        <dialog id="update_passcode_dialog">
+            <h3>Admin Authorization</h3>
+            <p style="margin: 0.75rem 0; color: var(--text-muted);">Please enter the admin passcode to apply changes:</p>
+            <input type="password" id="modal_passcode_input" placeholder="Admin Passcode" />
+            <div class="dialog-actions">
+                <button type="button" id="cancel_dialog_btn" class="btn btn-secondary">Cancel</button>
+                <button type="button" id="confirm_dialog_btn" class="btn btn-primary">Authorize & Save</button>
+            </div>
+        </dialog>
+    </main>
+
+    <script>
+        const form = document.getElementById("update-form");
+        const dialog = document.getElementById("update_passcode_dialog");
+        const modalInput = document.getElementById("modal_passcode_input");
+        const hiddenPasscode = document.getElementById("hidden_admin_passcode");
+        const confirmBtn = document.getElementById("confirm_dialog_btn");
+        const cancelBtn = document.getElementById("cancel_dialog_btn");
+
+        form.addEventListener("submit", (e) => {
+            if (!hiddenPasscode.value) {
+                e.preventDefault();
+                modalInput.value = "";
+                dialog.showModal();
+                modalInput.focus();
+            }
+        });
+
+        confirmBtn.addEventListener("click", () => {
+            const entered = modalInput.value.trim();
+            if (!entered) return;
+            hiddenPasscode.value = entered;
+            dialog.close();
+            form.submit();
+        });
+
+        cancelBtn.addEventListener("click", () => {
+            dialog.close();
+        });
+    </script>
+</body>
+</html>

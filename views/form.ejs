@@ -1,0 +1,165 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Message</title>
+    
+</head>
+<body>
+    <main class="container">
+        <header class="header-section">
+            <h1>New Game</h1>
+        </header>
+
+        <div class="form-card">
+            <form method="POST" action="/new">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="game_name">Game name</label>
+                        <input type="text" id="game_name" name="game_name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age_rating">Age rating</label>
+                        <select name="age_rating" id="age_rating">
+                            
+                            <option value="Kids">Kids</option>
+                            <option value="Teen">Teen</option>
+                            <option value="Mature 17+">Mature 17+</option>
+                            
+                        </select>
+                    </div>
+                    <label for="score">Game Score (out of 100)</label>
+                    <input type="number" id="score" name="score" required/>
+
+                    <label for="Genre id">Select Genre</label>
+                    <select name="genre" id="genre">
+                    
+                        <option value="1">Action RPG</option>
+                        <option value="2">Soulslike</option>
+                        <option value="3">Action-Adventure</option>
+                        <option value="4">Roguelike</option>
+                        <option value="5">Turn Based RPG</option>
+                        <option value="6">First Person Shooter</option>
+                        <option value="7">Interactive Drama</option>
+                        <option value="8">Metroidvania</option>
+                        <option value="9">Survival Horror</option>
+                        <option value="10">Open World Adventure</option>
+                    </select>
+                    <label for="developer-select">Select Developer</label>
+                        <select name="developer_id" id="developer-select">
+                            <option value="101">CD Projekt Red</option>
+                            <option value="102">FromSoftware</option>
+                            <option value="103">Insomniac Games</option>
+                            <option value="104">Santa Monica Studio</option>
+                            <option value="105">Remedy Entertainment</option>
+                            <option value="106">Housemarque</option>
+                            <option value="107">Sucker Punch Productions</option>
+                            <option value="108">Quantic Dream</option>
+                            <option value="109">Warhorse Studios</option>
+                            <option value="110">Larian Studios</option>
+                        </select>
+
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Message</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Game</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <header class="header-section">
+            <h1>New Game</h1>
+        </header>
+
+        <% if (locals.errors && errors.length > 0) { %>
+            <ul class="error-box">
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <div class="form-card">
+            <form method="POST" action="/new">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="game_name">Game name</label>
+                        <input type="text" id="game_name" name="game_name" value="<%= locals.prev ? prev.game_name : '' %>" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_url">Cover Image URL</label>
+                        <input type="url" id="image_url" name="image_url" placeholder="https://example.com/cover.jpg" value="<%= locals.prev ? prev.image_url : '' %>" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="age_rating">Age rating</label>
+                        <select name="age_rating" id="age_rating">
+                            <option value="Kids">Kids</option>
+                            <option value="Teen">Teen</option>
+                            <option value="Mature 17+">Mature 17+</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="score">Game Score (out of 100)</label>
+                        <input type="number" id="score" name="score" min="0" max="100" value="<%= locals.prev ? prev.score : '' %>" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="genre">Select Genre</label>
+                        <select name="genre" id="genre">
+                            <option value="1">Action RPG</option>
+                            <option value="2">Soulslike</option>
+                            <option value="3">Action-Adventure</option>
+                            <option value="4">Roguelike</option>
+                            <option value="5">Turn Based RPG</option>
+                            <option value="6">First Person Shooter</option>
+                            <option value="7">Interactive Drama</option>
+                            <option value="8">Metroidvania</option>
+                            <option value="9">Survival Horror</option>
+                            <option value="10">Open World Adventure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="developer-select">Select Developer</label>
+                        <select name="developer_id" id="developer-select">
+                            <option value="101">CD Projekt Red</option>
+                            <option value="102">FromSoftware</option>
+                            <option value="103">Insomniac Games</option>
+                            <option value="104">Santa Monica Studio</option>
+                            <option value="105">Remedy Entertainment</option>
+                            <option value="106">Housemarque</option>
+                            <option value="107">Sucker Punch Productions</option>
+                            <option value="108">Quantic Dream</option>
+                            <option value="109">Warhorse Studios</option>
+                            <option value="110">Larian Studios</option>
+                        </select>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Create Game</button>
+                    <a href="/" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

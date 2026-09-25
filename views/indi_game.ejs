@@ -1,0 +1,139 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <main class="container">
+      
+        <div class="message-card">
+            <h1><%= game.name %></h1>
+            
+            <a href="/games/<%=game.game_id %>/update">Edit</a>
+            <button command="show-modal" commandfor="delete_dialog">Delete Game</button>
+            <dialog id="delete_dialog">
+                <form method="post" action="/games/<%=game.game_id %>/delete">
+                    
+                    <p>Are you sure you want to delete</p>
+                    <button type="submit">Yes</button>
+                    
+                </form>
+                <button commandfor="delete_dialog" command="close">Cancel</button>
+            </dialog>
+            <a href="/" class="btn btn-secondary btn-sm">← Go back</a>
+        </div>
+    </main>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= game.name %> - Details</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <main class="container">
+        <% if (locals.errors && errors.length > 0) { %>
+            <ul class="error-box">
+                <% errors.forEach(error => { %>
+                    <li><%= error.msg %></li>
+                <% }) %>
+            </ul>
+        <% } %>
+
+        <div class="game-detail-card">
+            <!-- Cover Art Column -->
+            <div class="game-detail-poster">
+                <% if (game.image_url) { %>
+                    <img src="<%= game.image_url %>" alt="<%= game.name %> Cover" class="game-cover-large" />
+                <% } else { %>
+                    <div class="game-cover-placeholder">No Cover Art Available</div>
+                <% } %>
+            </div>
+
+            <!-- Full Information Column -->
+            <div class="game-detail-info">
+                <header class="detail-header">
+                    <h1><%= game.name %></h1>
+                    <div class="meta-badges">
+                        <span class="badge badge-rating"><%= game.age_rating %></span>
+                        <span class="badge badge-score"><%= game.score %>/100</span>
+                    </div>
+                </header>
+
+                <hr class="detail-divider" />
+
+                <!-- Genre Breakdown -->
+                <section class="info-section">
+                    <h3>Genre</h3>
+                    <p class="section-title-highlight"><%= game.genre_name || 'Unassigned' %></p>
+                    <% if (game.genre_info) { %>
+                        <p class="section-subtext"><%= game.genre_info %></p>
+                    <% } %>
+                </section>
+
+                <!-- Developer Breakdown -->
+                <section class="info-section">
+                    <h3>Developer</h3>
+                    <p class="section-title-highlight">
+                        <%= game.developer_name || 'Unassigned' %>
+                        <% if (game.developer_location) { %>
+                            <span class="text-muted">(<%= game.developer_location %>)</span>
+                        <% } %>
+                    </p>
+                    <% if (game.developer_other_games) { %>
+                        <p class="section-subtext">
+                            <strong>Known for:</strong> <%= game.developer_other_games %>
+                        </p>
+                    <% } %>
+                </section>
+
+                <!-- Action Controls -->
+                <div class="card-actions">
+                    <a href="/games/<%= game.game_id %>/update" class="btn btn-primary">Edit Game</a>
+                    <button type="button" id="open_delete_btn" class="btn btn-danger">Delete Game</button>
+                    <a href="/" class="btn btn-secondary">← Back to Catalog</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Delete Confirmation & Passcode Dialog -->
+        <dialog id="delete_dialog">
+            <form method="post" action="/games/<%= game.game_id %>/delete">
+                <h3 style="color: var(--danger-color);">Confirm Deletion</h3>
+                <p style="margin: 0.75rem 0; color: var(--text-muted);">
+                    Are you sure you want to permanently delete <strong><%= game.name %></strong>?
+                </p>
+
+                <div class="form-group">
+                    <label for="delete_admin_passcode">Enter Admin Passcode:</label>
+                    <input type="password" id="delete_admin_passcode" name="admin_passcode" required placeholder="Passcode" />
+                </div>
+
+                <div class="dialog-actions">
+                    <button type="button" id="close_delete_btn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                </div>
+            </form>
+        </dialog>
+    </main>
+
+    <script>
+        const deleteDialog = document.getElementById("delete_dialog");
+        const openBtn = document.getElementById("open_delete_btn");
+        const closeBtn = document.getElementById("close_delete_btn");
+
+        openBtn.addEventListener("click", () => {
+            deleteDialog.showModal();
+        });
+
+        closeBtn.addEventListener("click", () => {
+            deleteDialog.close();
+        });
+    </script>
+</body>
+</html>
