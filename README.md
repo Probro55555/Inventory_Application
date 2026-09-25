@@ -37,10 +37,9 @@ ADMIN_PASSCODE=your_secret_passcode
 ```
 
 | Variable | Purpose |
-| :--- | :--- |
-| `PORT` | Port number the Express application listens on (default: `3000`) |
-| `connectionstring` | PostgreSQL connection URI string used by `db/pool.js` and `db/populatedb.js` |
-| `ADMIN_PASSCODE` | Secret passcode gate required for updating and deleting game entries |
+PORT=3000
+connectionstring=postgresql://<username>:<password>@localhost:5432/<database_name>
+ADMIN_PASSCODE=your_secret_passcode
 
 ---
 
