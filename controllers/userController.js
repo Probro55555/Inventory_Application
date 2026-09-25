@@ -95,7 +95,11 @@ module.exports = {
   delete_game,
 };
   */
-process.loadEnvFile();
+try {
+  process.loadEnvFile();
+} catch (e) {
+  // .env file not found (running on Render/production)
+}
 const db = require("../db/queries");
 const { body, validationResult } = require("express-validator");
 

@@ -17,14 +17,22 @@ module.exports = new Pool({
 });
  */
 const { Pool } = require("pg");
-process.loadEnvFile();
 
-const connectionString = process.env.connectionstring;
+try {
+  process.loadEnvFile();
+} catch (e) {
+  // .env file not found
+}
+
+const connectionString =
+  process.env.DATABASE_URL || process.env.connectionstring;
+
+const isRemote =
+  connectionString &&
+  (connectionString.includes("neon.tech") ||
+    connectionString.includes("sslmode=require"));
 
 module.exports = new Pool({
-  connectionString: connectionString,
-  ssl:
-    connectionString && connectionString.includes("neon.tech")
-      ? { rejectUnauthorized: false }
-      : false,
+  connectionString,
+  ssl: isRemote ? { rejectUnauthorized: false } : false,
 });
