@@ -31,10 +31,6 @@ Set up the environment variables (see the `.env` example below).
 
 Create a `.env` file in the project root (it's gitignored):
 ```env
-PORT=3000
-connectionstring=postgresql://probro:prouser@1@localhost:5432/game_management
-ADMIN_PASSCODE=your_secret_passcode
-```
 
 | Variable | Purpose |
 PORT=3000
