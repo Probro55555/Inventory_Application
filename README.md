@@ -41,12 +41,14 @@ ADMIN_PASSCODE=your_secret_passcode
 
 ## Packages and Setup
 
+
 | Package | Role | Where it's configured |
 | :--- | :--- | :--- |
 | **express** | Web framework | `app.js` — middleware, static assets, routing, error handling |
 | **ejs** | Template engine | `app.js` — `app.set("view engine", "ejs")`; views stored in `views/` |
 | **express-validator** | Server-side validation | `controllers/userController.js` — validates title, score, age rating, and image URLs |
 | **pg** | PostgreSQL client | `db/pool.js` — connection pool handling local and remote connections |
+
 
 ---
 
@@ -91,7 +93,7 @@ PostgreSQL tables (created in `db/populatedb.js`):
 
 | Command | Description |
 | :--- | :--- |
-| `npm start` | Starts the Express server using Node |
+| `node app.js` | Starts the Express server using Node |
 
 ---
 
