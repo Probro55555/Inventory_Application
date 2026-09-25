@@ -21,7 +21,7 @@ Create the tables and seed the data:
 node db/populatedb.js
 ```
 
-Set up the environment variables (see the `.env` example below).
+Set up the environment variables (see the configuration section below).
 
 ---
 
@@ -29,18 +29,23 @@ Set up the environment variables (see the `.env` example below).
 
 ### Environment Variables
 
-Create a `.env` file in the project root (it's gitignored):
-```env
+Create a `.env` file in the project root:
 
-| Variable | Purpose |
+```env
 PORT=3000
 connectionstring=postgresql://<username>:<password>@localhost:5432/<database_name>
 ADMIN_PASSCODE=your_secret_passcode
+```
+
+| Variable | Description |
+| :--- | :--- |
+| `PORT` | Local port number the Express server listens on (default: `3000`) |
+| `connectionstring` | PostgreSQL connection URI for local or remote database access |
+| `ADMIN_PASSCODE` | Secret passcode required to authorize edit and delete actions |
 
 ---
 
 ## Packages and Setup
-
 
 | Package | Role | Where it's configured |
 | :--- | :--- | :--- |
@@ -48,7 +53,6 @@ ADMIN_PASSCODE=your_secret_passcode
 | **ejs** | Template engine | `app.js` — `app.set("view engine", "ejs")`; views stored in `views/` |
 | **express-validator** | Server-side validation | `controllers/userController.js` — validates title, score, age rating, and image URLs |
 | **pg** | PostgreSQL client | `db/pool.js` — connection pool handling local and remote connections |
-
 
 ---
 
@@ -82,7 +86,7 @@ odin-inventory-app/
 
 ## Database Schema
 
-PostgreSQL tables (created in `db/populatedb.js`):
+PostgreSQL tables (defined in `db/populatedb.js`):
 - **genres** — genre dictionary records (`genre_id`, `genre_name`, `info`)
 - **developers** — studio portfolio records (`developer_id`, `developer_name`, `location`, `other_games`)
 - **games** — core game catalog data (`game_id`, `name`, `age_rating`, `score`, `image_url`, `genre_id`, `developer_id`) with foreign key constraints referencing `genres` and `developers`
@@ -106,14 +110,14 @@ This application is deployed using a decoupled stack to ensure continuous uptime
 - **Backend Server:** Render (Web Service)
 - **Database:** Neon.tech (Serverless PostgreSQL)
 
-Render's native free PostgreSQL instances are terminated after 30 days. To keep the project permanently operational without data expiration, the database is hosted externally on Neon.tech.
+Render's native free PostgreSQL instances are terminated after 30 days. To keep the project operational without data expiration, the database is hosted externally on Neon.tech.
 
 ### 2. Database Setup (Neon.tech)
 
 1. Created a serverless Postgres project on Neon.
 2. Generated a cloud connection URI string containing SSL configuration flags (`?sslmode=require`).
 3. Seeded all schema definitions and initial rows using `node db/populatedb.js "<NEON_CONNECTION_STRING>"`.
-4. Resynced identity sequences for `game_id`, `genre_id`, and `developer_id` using `setval(pg_get_serial_sequence(...))` to prevent ID collision during new inserts.
+4. Resynced identity sequences for `game_id`, `genre_id`, and `developer_id` using `setval(pg_get_serial_sequence(...))` to prevent ID collisions during new inserts.
 
 ### 3. Codebase Preparation
 
@@ -125,7 +129,7 @@ Render's native free PostgreSQL instances are terminated after 30 days. To keep 
 
 The Express app was deployed as a Render Web Service with the following configurations:
 - **Build Command:** `npm install`
-- **Start Command:** `npm start`
+- **Start Command:** `node app.js`
 - **Environment Variables:**
   - `connectionstring`: The Neon PostgreSQL connection string.
   - `ADMIN_PASSCODE`: The secret key checked during edit and delete requests.
